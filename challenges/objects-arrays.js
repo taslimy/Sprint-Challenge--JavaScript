@@ -14,21 +14,48 @@
 
 // Using your dinosaur objects, log answers to these questions:
 
+
+const trex = {
+  name: 'tyrannosaurus',
+  diet: 'carnivorous',
+  weight: '7000kg',
+  length: '12m',
+  period: 'Late Cretaceious',
+  speak: function () {
+    return 'RAWERSRARARWERSARARARRRR!';
+  }
+};
+
+const steg = {
+  name: "stegosaurus",
+  diet: "herbivorous",
+  weight: "2000kg",
+  length: "9m",
+  period: "Late Cretaceious"
+};
+
+const velp = {
+  name: "velociraptor",
+  diet: "carnivorous",
+  weight: "15kg",
+  length: "1.8m",
+  period: "Late Cretaceious"
+};
+
 // How much did tyrannosaurus weigh?
-console.log();
+console.log(` The Tyrannosaurus weigh is ${trex.weight}. `);
 
 // What was the diet of a velociraptor?
-console.log();
+console.log(` The Velociraptor was ${velp.diet} animal. `);
 
 // How long was a stegosaurus?
-console.log();
+console.log(` The Stegosaurus was from the ${steg.period} period. `);
 
 // What time period did tyrannosaurus live in?
-console.log();
-
+console.log(` The Tyrannosaurus was from the ${trex.period} period.`);
 
 // Create a new roar method for the tyrannosaurus.  When called, return "RAWERSRARARWERSARARARRRR!" Log the result.
-console.log();
+console.log(trex.speak());
 
 
 // ==== Arrays ====
@@ -50,6 +77,12 @@ const graduates = [{"id":1,"first_name":"Cynde","university":"Missouri Southern 
 
 Once you have the new array created, sort the universities alphabetically and log the result. */
 const universities = [];
+for (let i = 0; i < graduates.length; i++) {
+  if (!universities.includes(graduates[i].university)){
+    universities.push(graduates[i].university);
+  }
+}
+universities.sort();
 console.log(universities)
 
 /* Request 2: Create a new array called contactInfo that contains both first name and email of each student. 
@@ -59,11 +92,20 @@ Name email@example.com
 
 Log the result of your new array. */
 const contactInfo = [];
+for (let i = 0; i < graduates.length; i++){
+  contactInfo.push(`${graduates[i].first_name} ${graduates[i].email}`);
+}
 console.log(contactInfo);
 
 
 /* Request 3: Find out how many universities have the string "Uni" included in their name. Create a new array called uni that contains them all. Log the result. */
 const uni = [];
+
+for (let i = 0; i < graduates.length; i++) {
+  if (graduates[i].university.includes('Uni')) {
+    uni.push(graduates[i].university)
+  }
+}
 console.log(uni);
 
 
@@ -89,37 +131,60 @@ The zoo wants to display both the scientific name and the animal name in front o
 
 */
 const animalNames = [];
+zooAnimals.forEach(element => {
+  animalNames.push(
+    `Name: ${element.animal_name}, Scientific: ${element.scientific_name}`
+  );
+});
 console.log(animalNames);
 
+
 /* Request 2: .map()    
+
+MDN
+const map1 = array1.map(x => x * 2);
 
 The zoos need a list of all their animal's names (names only, not scientific) converted to lower case.  Create a new array named lowerCase and map over each name to convert them all to lower case.  Log the resut.
 
 */
 
-const lowerCase = [];
+const lowerCase = zooAnimals.map((zooAnimal, index, zooAnimals) => {
+  return zooAnimal.animal_name.toLowerCase();
+});
 console.log(lowerCase); 
 
 /* Request 3: .filter() 
 
+MDN
+const result = words.filter(word => word.length > 6);
+
 The zoos are concenred about animals with a lower population count. Find out which animals have a population less than 5.
 
 */
-const largerPopulation = [];
+const largerPopulation = zooAnimals.filter(zooAnimal => {
+  if (zooAnimal.population <= 5) {
+    return true
+  };
+});
 console.log(largerPopulation);
 
 /* Request 4: .reduce() 
 
+MDN
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
 The zoos need to know their total animal population across the United States.  Find the total population from all the zoos using the .reduce() method.
 
 */
-const populationTotal = 0;
+const populationTotal = zooAnimals.reduce((population, zooAnimal, index, zooAnimals) => {
+  return population += zooAnimal.population;
+}, 0);
 console.log(populationTotal);
 
 
 /* 
 
 Stretch: If you haven't already, convert your array method callbacks into arrow functions.
-
+- Finished.
 */
 
